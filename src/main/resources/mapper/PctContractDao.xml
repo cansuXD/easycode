@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjc.dao.PctContractDao">
+
+    <resultMap type="com.yjc.entity.PctContract" id="PctContractMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="contractName" column="contract_name" jdbcType="VARCHAR"/>
+        <result property="contractNo" column="contract_no" jdbcType="VARCHAR"/>
+        <result property="classId" column="class_id" jdbcType="VARCHAR"/>
+        <result property="className" column="class_name" jdbcType="VARCHAR"/>
+        <result property="classNamePath" column="class_name_path" jdbcType="VARCHAR"/>
+        <result property="contractType" column="contract_type" jdbcType="INTEGER"/>
+        <result property="signBelongType" column="sign_belong_type" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="VARCHAR"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+        <result property="corpId" column="corp_id" jdbcType="VARCHAR"/>
+        <result property="corpName" column="corp_name" jdbcType="VARCHAR"/>
+        <result property="invoiceTypeId" column="invoice_type_id" jdbcType="VARCHAR"/>
+        <result property="invoiceTypeName" column="invoice_type_name" jdbcType="VARCHAR"/>
+        <result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+        <result property="signDate" column="sign_date" jdbcType="TIMESTAMP"/>
+        <result property="signCurrency" column="sign_currency" jdbcType="VARCHAR"/>
+        <result property="signCurrencyName" column="sign_currency_name" jdbcType="VARCHAR"/>
+        <result property="purchaseId" column="purchase_id" jdbcType="VARCHAR"/>
+        <result property="purchaseName" column="purchase_name" jdbcType="VARCHAR"/>
+        <result property="protocolId" column="protocol_id" jdbcType="VARCHAR"/>
+        <result property="protocolName" column="protocol_name" jdbcType="VARCHAR"/>
+        <result property="sourceType" column="source_type" jdbcType="INTEGER"/>
+        <result property="enabledRelatePlanContract" column="enabled_relate_plan_contract" jdbcType="INTEGER"/>
+        <result property="exchangeRate" column="exchange_rate" jdbcType="NUMERIC"/>
+        <result property="operatorId" column="operator_id" jdbcType="VARCHAR"/>
+        <result property="operatorName" column="operator_name" jdbcType="VARCHAR"/>
+        <result property="operatorDeptId" column="operator_dept_id" jdbcType="VARCHAR"/>
+        <result property="operatorDeptName" column="operator_dept_name" jdbcType="VARCHAR"/>
+        <result property="signTotalAmount" column="sign_total_amount" jdbcType="NUMERIC"/>
+        <result property="signCostAmount" column="sign_cost_amount" jdbcType="NUMERIC"/>
+        <result property="signTaxRate" column="sign_tax_rate" jdbcType="NUMERIC"/>
+        <result property="signTaxAmount" column="sign_tax_amount" jdbcType="NUMERIC"/>
+        <result property="signTotalAmountRmb" column="sign_total_amount_rmb" jdbcType="NUMERIC"/>
+        <result property="signCostAmountRmb" column="sign_cost_amount_rmb" jdbcType="NUMERIC"/>
+        <result property="signTaxAmountRmb" column="sign_tax_amount_rmb" jdbcType="NUMERIC"/>
+        <result property="paymentControlRate" column="payment_control_rate" jdbcType="NUMERIC"/>
+        <result property="allowedChangeRate" column="allowed_change_rate" jdbcType="NUMERIC"/>
+        <result property="currentTaskCandidatesName" column="current_task_candidates_name" jdbcType="VARCHAR"/>
+        <result property="formalTime" column="formal_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="entryId" column="entry_id" jdbcType="VARCHAR"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+        <result property="isSettled" column="is_settled" jdbcType="INTEGER"/>
+        <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+        <result property="creatorName" column="creator_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updatorId" column="updator_id" jdbcType="VARCHAR"/>
+        <result property="updatorName" column="updator_name" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PctContractMap">
+        select
+          id, contract_name, contract_no, class_id, class_name, class_name_path, contract_type, sign_belong_type, project_id, project_name, corp_id, corp_name, invoice_type_id, invoice_type_name, supplier_name, sign_date, sign_currency, sign_currency_name, purchase_id, purchase_name, protocol_id, protocol_name, source_type, enabled_relate_plan_contract, exchange_rate, operator_id, operator_name, operator_dept_id, operator_dept_name, sign_total_amount, sign_cost_amount, sign_tax_rate, sign_tax_amount, sign_total_amount_rmb, sign_cost_amount_rmb, sign_tax_amount_rmb, payment_control_rate, allowed_change_rate, current_task_candidates_name, formal_time, status, entry_id, is_deleted, is_settled, creator_id, creator_name, create_time, updator_id, updator_name, update_time
+        from pct_contract
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PctContractMap">
+        select
+          id, contract_name, contract_no, class_id, class_name, class_name_path, contract_type, sign_belong_type, project_id, project_name, corp_id, corp_name, invoice_type_id, invoice_type_name, supplier_name, sign_date, sign_currency, sign_currency_name, purchase_id, purchase_name, protocol_id, protocol_name, source_type, enabled_relate_plan_contract, exchange_rate, operator_id, operator_name, operator_dept_id, operator_dept_name, sign_total_amount, sign_cost_amount, sign_tax_rate, sign_tax_amount, sign_total_amount_rmb, sign_cost_amount_rmb, sign_tax_amount_rmb, payment_control_rate, allowed_change_rate, current_task_candidates_name, formal_time, status, entry_id, is_deleted, is_settled, creator_id, creator_name, create_time, updator_id, updator_name, update_time
+        from pct_contract
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="contractName != null and contractName != ''">
+                and contract_name = #{contractName}
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                and contract_no = #{contractNo}
+            </if>
+            <if test="classId != null and classId != ''">
+                and class_id = #{classId}
+            </if>
+            <if test="className != null and className != ''">
+                and class_name = #{className}
+            </if>
+            <if test="classNamePath != null and classNamePath != ''">
+                and class_name_path = #{classNamePath}
+            </if>
+            <if test="contractType != null">
+                and contract_type = #{contractType}
+            </if>
+            <if test="signBelongType != null">
+                and sign_belong_type = #{signBelongType}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="corpId != null and corpId != ''">
+                and corp_id = #{corpId}
+            </if>
+            <if test="corpName != null and corpName != ''">
+                and corp_name = #{corpName}
+            </if>
+            <if test="invoiceTypeId != null and invoiceTypeId != ''">
+                and invoice_type_id = #{invoiceTypeId}
+            </if>
+            <if test="invoiceTypeName != null and invoiceTypeName != ''">
+                and invoice_type_name = #{invoiceTypeName}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name = #{supplierName}
+            </if>
+            <if test="signDate != null">
+                and sign_date = #{signDate}
+            </if>
+            <if test="signCurrency != null and signCurrency != ''">
+                and sign_currency = #{signCurrency}
+            </if>
+            <if test="signCurrencyName != null and signCurrencyName != ''">
+                and sign_currency_name = #{signCurrencyName}
+            </if>
+            <if test="purchaseId != null and purchaseId != ''">
+                and purchase_id = #{purchaseId}
+            </if>
+            <if test="purchaseName != null and purchaseName != ''">
+                and purchase_name = #{purchaseName}
+            </if>
+            <if test="protocolId != null and protocolId != ''">
+                and protocol_id = #{protocolId}
+            </if>
+            <if test="protocolName != null and protocolName != ''">
+                and protocol_name = #{protocolName}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            <if test="enabledRelatePlanContract != null">
+                and enabled_relate_plan_contract = #{enabledRelatePlanContract}
+            </if>
+            <if test="exchangeRate != null">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="operatorId != null and operatorId != ''">
+                and operator_id = #{operatorId}
+            </if>
+            <if test="operatorName != null and operatorName != ''">
+                and operator_name = #{operatorName}
+            </if>
+            <if test="operatorDeptId != null and operatorDeptId != ''">
+                and operator_dept_id = #{operatorDeptId}
+            </if>
+            <if test="operatorDeptName != null and operatorDeptName != ''">
+                and operator_dept_name = #{operatorDeptName}
+            </if>
+            <if test="signTotalAmount != null">
+                and sign_total_amount = #{signTotalAmount}
+            </if>
+            <if test="signCostAmount != null">
+                and sign_cost_amount = #{signCostAmount}
+            </if>
+            <if test="signTaxRate != null">
+                and sign_tax_rate = #{signTaxRate}
+            </if>
+            <if test="signTaxAmount != null">
+                and sign_tax_amount = #{signTaxAmount}
+            </if>
+            <if test="signTotalAmountRmb != null">
+                and sign_total_amount_rmb = #{signTotalAmountRmb}
+            </if>
+            <if test="signCostAmountRmb != null">
+                and sign_cost_amount_rmb = #{signCostAmountRmb}
+            </if>
+            <if test="signTaxAmountRmb != null">
+                and sign_tax_amount_rmb = #{signTaxAmountRmb}
+            </if>
+            <if test="paymentControlRate != null">
+                and payment_control_rate = #{paymentControlRate}
+            </if>
+            <if test="allowedChangeRate != null">
+                and allowed_change_rate = #{allowedChangeRate}
+            </if>
+            <if test="currentTaskCandidatesName != null and currentTaskCandidatesName != ''">
+                and current_task_candidates_name = #{currentTaskCandidatesName}
+            </if>
+            <if test="formalTime != null">
+                and formal_time = #{formalTime}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="entryId != null and entryId != ''">
+                and entry_id = #{entryId}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="isSettled != null">
+                and is_settled = #{isSettled}
+            </if>
+            <if test="creatorId != null and creatorId != ''">
+                and creator_id = #{creatorId}
+            </if>
+            <if test="creatorName != null and creatorName != ''">
+                and creator_name = #{creatorName}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updatorId != null and updatorId != ''">
+                and updator_id = #{updatorId}
+            </if>
+            <if test="updatorName != null and updatorName != ''">
+                and updator_name = #{updatorName}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from pct_contract
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="contractName != null and contractName != ''">
+                and contract_name = #{contractName}
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                and contract_no = #{contractNo}
+            </if>
+            <if test="classId != null and classId != ''">
+                and class_id = #{classId}
+            </if>
+            <if test="className != null and className != ''">
+                and class_name = #{className}
+            </if>
+            <if test="classNamePath != null and classNamePath != ''">
+                and class_name_path = #{classNamePath}
+            </if>
+            <if test="contractType != null">
+                and contract_type = #{contractType}
+            </if>
+            <if test="signBelongType != null">
+                and sign_belong_type = #{signBelongType}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="corpId != null and corpId != ''">
+                and corp_id = #{corpId}
+            </if>
+            <if test="corpName != null and corpName != ''">
+                and corp_name = #{corpName}
+            </if>
+            <if test="invoiceTypeId != null and invoiceTypeId != ''">
+                and invoice_type_id = #{invoiceTypeId}
+            </if>
+            <if test="invoiceTypeName != null and invoiceTypeName != ''">
+                and invoice_type_name = #{invoiceTypeName}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name = #{supplierName}
+            </if>
+            <if test="signDate != null">
+                and sign_date = #{signDate}
+            </if>
+            <if test="signCurrency != null and signCurrency != ''">
+                and sign_currency = #{signCurrency}
+            </if>
+            <if test="signCurrencyName != null and signCurrencyName != ''">
+                and sign_currency_name = #{signCurrencyName}
+            </if>
+            <if test="purchaseId != null and purchaseId != ''">
+                and purchase_id = #{purchaseId}
+            </if>
+            <if test="purchaseName != null and purchaseName != ''">
+                and purchase_name = #{purchaseName}
+            </if>
+            <if test="protocolId != null and protocolId != ''">
+                and protocol_id = #{protocolId}
+            </if>
+            <if test="protocolName != null and protocolName != ''">
+                and protocol_name = #{protocolName}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            <if test="enabledRelatePlanContract != null">
+                and enabled_relate_plan_contract = #{enabledRelatePlanContract}
+            </if>
+            <if test="exchangeRate != null">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="operatorId != null and operatorId != ''">
+                and operator_id = #{operatorId}
+            </if>
+            <if test="operatorName != null and operatorName != ''">
+                and operator_name = #{operatorName}
+            </if>
+            <if test="operatorDeptId != null and operatorDeptId != ''">
+                and operator_dept_id = #{operatorDeptId}
+            </if>
+            <if test="operatorDeptName != null and operatorDeptName != ''">
+                and operator_dept_name = #{operatorDeptName}
+            </if>
+            <if test="signTotalAmount != null">
+                and sign_total_amount = #{signTotalAmount}
+            </if>
+            <if test="signCostAmount != null">
+                and sign_cost_amount = #{signCostAmount}
+            </if>
+            <if test="signTaxRate != null">
+                and sign_tax_rate = #{signTaxRate}
+            </if>
+            <if test="signTaxAmount != null">
+                and sign_tax_amount = #{signTaxAmount}
+            </if>
+            <if test="signTotalAmountRmb != null">
+                and sign_total_amount_rmb = #{signTotalAmountRmb}
+            </if>
+            <if test="signCostAmountRmb != null">
+                and sign_cost_amount_rmb = #{signCostAmountRmb}
+            </if>
+            <if test="signTaxAmountRmb != null">
+                and sign_tax_amount_rmb = #{signTaxAmountRmb}
+            </if>
+            <if test="paymentControlRate != null">
+                and payment_control_rate = #{paymentControlRate}
+            </if>
+            <if test="allowedChangeRate != null">
+                and allowed_change_rate = #{allowedChangeRate}
+            </if>
+            <if test="currentTaskCandidatesName != null and currentTaskCandidatesName != ''">
+                and current_task_candidates_name = #{currentTaskCandidatesName}
+            </if>
+            <if test="formalTime != null">
+                and formal_time = #{formalTime}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="entryId != null and entryId != ''">
+                and entry_id = #{entryId}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="isSettled != null">
+                and is_settled = #{isSettled}
+            </if>
+            <if test="creatorId != null and creatorId != ''">
+                and creator_id = #{creatorId}
+            </if>
+            <if test="creatorName != null and creatorName != ''">
+                and creator_name = #{creatorName}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updatorId != null and updatorId != ''">
+                and updator_id = #{updatorId}
+            </if>
+            <if test="updatorName != null and updatorName != ''">
+                and updator_name = #{updatorName}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into pct_contract(contract_name, contract_no, class_id, class_name, class_name_path, contract_type, sign_belong_type, project_id, project_name, corp_id, corp_name, invoice_type_id, invoice_type_name, supplier_name, sign_date, sign_currency, sign_currency_name, purchase_id, purchase_name, protocol_id, protocol_name, source_type, enabled_relate_plan_contract, exchange_rate, operator_id, operator_name, operator_dept_id, operator_dept_name, sign_total_amount, sign_cost_amount, sign_tax_rate, sign_tax_amount, sign_total_amount_rmb, sign_cost_amount_rmb, sign_tax_amount_rmb, payment_control_rate, allowed_change_rate, current_task_candidates_name, formal_time, status, entry_id, is_deleted, is_settled, creator_id, creator_name, create_time, updator_id, updator_name, update_time)
+        values (#{contractName}, #{contractNo}, #{classId}, #{className}, #{classNamePath}, #{contractType}, #{signBelongType}, #{projectId}, #{projectName}, #{corpId}, #{corpName}, #{invoiceTypeId}, #{invoiceTypeName}, #{supplierName}, #{signDate}, #{signCurrency}, #{signCurrencyName}, #{purchaseId}, #{purchaseName}, #{protocolId}, #{protocolName}, #{sourceType}, #{enabledRelatePlanContract}, #{exchangeRate}, #{operatorId}, #{operatorName}, #{operatorDeptId}, #{operatorDeptName}, #{signTotalAmount}, #{signCostAmount}, #{signTaxRate}, #{signTaxAmount}, #{signTotalAmountRmb}, #{signCostAmountRmb}, #{signTaxAmountRmb}, #{paymentControlRate}, #{allowedChangeRate}, #{currentTaskCandidatesName}, #{formalTime}, #{status}, #{entryId}, #{isDeleted}, #{isSettled}, #{creatorId}, #{creatorName}, #{createTime}, #{updatorId}, #{updatorName}, #{updateTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into pct_contract(contract_name, contract_no, class_id, class_name, class_name_path, contract_type, sign_belong_type, project_id, project_name, corp_id, corp_name, invoice_type_id, invoice_type_name, supplier_name, sign_date, sign_currency, sign_currency_name, purchase_id, purchase_name, protocol_id, protocol_name, source_type, enabled_relate_plan_contract, exchange_rate, operator_id, operator_name, operator_dept_id, operator_dept_name, sign_total_amount, sign_cost_amount, sign_tax_rate, sign_tax_amount, sign_total_amount_rmb, sign_cost_amount_rmb, sign_tax_amount_rmb, payment_control_rate, allowed_change_rate, current_task_candidates_name, formal_time, status, entry_id, is_deleted, is_settled, creator_id, creator_name, create_time, updator_id, updator_name, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.contractName}, #{entity.contractNo}, #{entity.classId}, #{entity.className}, #{entity.classNamePath}, #{entity.contractType}, #{entity.signBelongType}, #{entity.projectId}, #{entity.projectName}, #{entity.corpId}, #{entity.corpName}, #{entity.invoiceTypeId}, #{entity.invoiceTypeName}, #{entity.supplierName}, #{entity.signDate}, #{entity.signCurrency}, #{entity.signCurrencyName}, #{entity.purchaseId}, #{entity.purchaseName}, #{entity.protocolId}, #{entity.protocolName}, #{entity.sourceType}, #{entity.enabledRelatePlanContract}, #{entity.exchangeRate}, #{entity.operatorId}, #{entity.operatorName}, #{entity.operatorDeptId}, #{entity.operatorDeptName}, #{entity.signTotalAmount}, #{entity.signCostAmount}, #{entity.signTaxRate}, #{entity.signTaxAmount}, #{entity.signTotalAmountRmb}, #{entity.signCostAmountRmb}, #{entity.signTaxAmountRmb}, #{entity.paymentControlRate}, #{entity.allowedChangeRate}, #{entity.currentTaskCandidatesName}, #{entity.formalTime}, #{entity.status}, #{entity.entryId}, #{entity.isDeleted}, #{entity.isSettled}, #{entity.creatorId}, #{entity.creatorName}, #{entity.createTime}, #{entity.updatorId}, #{entity.updatorName}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into pct_contract(contract_name, contract_no, class_id, class_name, class_name_path, contract_type, sign_belong_type, project_id, project_name, corp_id, corp_name, invoice_type_id, invoice_type_name, supplier_name, sign_date, sign_currency, sign_currency_name, purchase_id, purchase_name, protocol_id, protocol_name, source_type, enabled_relate_plan_contract, exchange_rate, operator_id, operator_name, operator_dept_id, operator_dept_name, sign_total_amount, sign_cost_amount, sign_tax_rate, sign_tax_amount, sign_total_amount_rmb, sign_cost_amount_rmb, sign_tax_amount_rmb, payment_control_rate, allowed_change_rate, current_task_candidates_name, formal_time, status, entry_id, is_deleted, is_settled, creator_id, creator_name, create_time, updator_id, updator_name, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.contractName}, #{entity.contractNo}, #{entity.classId}, #{entity.className}, #{entity.classNamePath}, #{entity.contractType}, #{entity.signBelongType}, #{entity.projectId}, #{entity.projectName}, #{entity.corpId}, #{entity.corpName}, #{entity.invoiceTypeId}, #{entity.invoiceTypeName}, #{entity.supplierName}, #{entity.signDate}, #{entity.signCurrency}, #{entity.signCurrencyName}, #{entity.purchaseId}, #{entity.purchaseName}, #{entity.protocolId}, #{entity.protocolName}, #{entity.sourceType}, #{entity.enabledRelatePlanContract}, #{entity.exchangeRate}, #{entity.operatorId}, #{entity.operatorName}, #{entity.operatorDeptId}, #{entity.operatorDeptName}, #{entity.signTotalAmount}, #{entity.signCostAmount}, #{entity.signTaxRate}, #{entity.signTaxAmount}, #{entity.signTotalAmountRmb}, #{entity.signCostAmountRmb}, #{entity.signTaxAmountRmb}, #{entity.paymentControlRate}, #{entity.allowedChangeRate}, #{entity.currentTaskCandidatesName}, #{entity.formalTime}, #{entity.status}, #{entity.entryId}, #{entity.isDeleted}, #{entity.isSettled}, #{entity.creatorId}, #{entity.creatorName}, #{entity.createTime}, #{entity.updatorId}, #{entity.updatorName}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        contract_name = values(contract_name),
+        contract_no = values(contract_no),
+        class_id = values(class_id),
+        class_name = values(class_name),
+        class_name_path = values(class_name_path),
+        contract_type = values(contract_type),
+        sign_belong_type = values(sign_belong_type),
+        project_id = values(project_id),
+        project_name = values(project_name),
+        corp_id = values(corp_id),
+        corp_name = values(corp_name),
+        invoice_type_id = values(invoice_type_id),
+        invoice_type_name = values(invoice_type_name),
+        supplier_name = values(supplier_name),
+        sign_date = values(sign_date),
+        sign_currency = values(sign_currency),
+        sign_currency_name = values(sign_currency_name),
+        purchase_id = values(purchase_id),
+        purchase_name = values(purchase_name),
+        protocol_id = values(protocol_id),
+        protocol_name = values(protocol_name),
+        source_type = values(source_type),
+        enabled_relate_plan_contract = values(enabled_relate_plan_contract),
+        exchange_rate = values(exchange_rate),
+        operator_id = values(operator_id),
+        operator_name = values(operator_name),
+        operator_dept_id = values(operator_dept_id),
+        operator_dept_name = values(operator_dept_name),
+        sign_total_amount = values(sign_total_amount),
+        sign_cost_amount = values(sign_cost_amount),
+        sign_tax_rate = values(sign_tax_rate),
+        sign_tax_amount = values(sign_tax_amount),
+        sign_total_amount_rmb = values(sign_total_amount_rmb),
+        sign_cost_amount_rmb = values(sign_cost_amount_rmb),
+        sign_tax_amount_rmb = values(sign_tax_amount_rmb),
+        payment_control_rate = values(payment_control_rate),
+        allowed_change_rate = values(allowed_change_rate),
+        current_task_candidates_name = values(current_task_candidates_name),
+        formal_time = values(formal_time),
+        status = values(status),
+        entry_id = values(entry_id),
+        is_deleted = values(is_deleted),
+        is_settled = values(is_settled),
+        creator_id = values(creator_id),
+        creator_name = values(creator_name),
+        create_time = values(create_time),
+        updator_id = values(updator_id),
+        updator_name = values(updator_name),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update pct_contract
+        <set>
+            <if test="contractName != null and contractName != ''">
+                contract_name = #{contractName},
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                contract_no = #{contractNo},
+            </if>
+            <if test="classId != null and classId != ''">
+                class_id = #{classId},
+            </if>
+            <if test="className != null and className != ''">
+                class_name = #{className},
+            </if>
+            <if test="classNamePath != null and classNamePath != ''">
+                class_name_path = #{classNamePath},
+            </if>
+            <if test="contractType != null">
+                contract_type = #{contractType},
+            </if>
+            <if test="signBelongType != null">
+                sign_belong_type = #{signBelongType},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="projectName != null and projectName != ''">
+                project_name = #{projectName},
+            </if>
+            <if test="corpId != null and corpId != ''">
+                corp_id = #{corpId},
+            </if>
+            <if test="corpName != null and corpName != ''">
+                corp_name = #{corpName},
+            </if>
+            <if test="invoiceTypeId != null and invoiceTypeId != ''">
+                invoice_type_id = #{invoiceTypeId},
+            </if>
+            <if test="invoiceTypeName != null and invoiceTypeName != ''">
+                invoice_type_name = #{invoiceTypeName},
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                supplier_name = #{supplierName},
+            </if>
+            <if test="signDate != null">
+                sign_date = #{signDate},
+            </if>
+            <if test="signCurrency != null and signCurrency != ''">
+                sign_currency = #{signCurrency},
+            </if>
+            <if test="signCurrencyName != null and signCurrencyName != ''">
+                sign_currency_name = #{signCurrencyName},
+            </if>
+            <if test="purchaseId != null and purchaseId != ''">
+                purchase_id = #{purchaseId},
+            </if>
+            <if test="purchaseName != null and purchaseName != ''">
+                purchase_name = #{purchaseName},
+            </if>
+            <if test="protocolId != null and protocolId != ''">
+                protocol_id = #{protocolId},
+            </if>
+            <if test="protocolName != null and protocolName != ''">
+                protocol_name = #{protocolName},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType},
+            </if>
+            <if test="enabledRelatePlanContract != null">
+                enabled_relate_plan_contract = #{enabledRelatePlanContract},
+            </if>
+            <if test="exchangeRate != null">
+                exchange_rate = #{exchangeRate},
+            </if>
+            <if test="operatorId != null and operatorId != ''">
+                operator_id = #{operatorId},
+            </if>
+            <if test="operatorName != null and operatorName != ''">
+                operator_name = #{operatorName},
+            </if>
+            <if test="operatorDeptId != null and operatorDeptId != ''">
+                operator_dept_id = #{operatorDeptId},
+            </if>
+            <if test="operatorDeptName != null and operatorDeptName != ''">
+                operator_dept_name = #{operatorDeptName},
+            </if>
+            <if test="signTotalAmount != null">
+                sign_total_amount = #{signTotalAmount},
+            </if>
+            <if test="signCostAmount != null">
+                sign_cost_amount = #{signCostAmount},
+            </if>
+            <if test="signTaxRate != null">
+                sign_tax_rate = #{signTaxRate},
+            </if>
+            <if test="signTaxAmount != null">
+                sign_tax_amount = #{signTaxAmount},
+            </if>
+            <if test="signTotalAmountRmb != null">
+                sign_total_amount_rmb = #{signTotalAmountRmb},
+            </if>
+            <if test="signCostAmountRmb != null">
+                sign_cost_amount_rmb = #{signCostAmountRmb},
+            </if>
+            <if test="signTaxAmountRmb != null">
+                sign_tax_amount_rmb = #{signTaxAmountRmb},
+            </if>
+            <if test="paymentControlRate != null">
+                payment_control_rate = #{paymentControlRate},
+            </if>
+            <if test="allowedChangeRate != null">
+                allowed_change_rate = #{allowedChangeRate},
+            </if>
+            <if test="currentTaskCandidatesName != null and currentTaskCandidatesName != ''">
+                current_task_candidates_name = #{currentTaskCandidatesName},
+            </if>
+            <if test="formalTime != null">
+                formal_time = #{formalTime},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="entryId != null and entryId != ''">
+                entry_id = #{entryId},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="isSettled != null">
+                is_settled = #{isSettled},
+            </if>
+            <if test="creatorId != null and creatorId != ''">
+                creator_id = #{creatorId},
+            </if>
+            <if test="creatorName != null and creatorName != ''">
+                creator_name = #{creatorName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updatorId != null and updatorId != ''">
+                updator_id = #{updatorId},
+            </if>
+            <if test="updatorName != null and updatorName != ''">
+                updator_name = #{updatorName},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from pct_contract where id = #{id}
+    </delete>
+
+</mapper>
+
